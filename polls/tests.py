@@ -59,22 +59,26 @@ class QuestionIndexViewTests(TestCase):
 
     def test_past_question(self):
         """
-        Questions with a pub_date in the past are displayed on the
-        index page.
+        Questions with a pub_date in the past AND 
+        at least two choices are displayed on the index page.
         """
-        create_question(question_text="Past question.", days=-30)
+        q = create_question(question_text="Past question with two choices.", days=-30)
+        q.choice_set.create(choice_text='Not much')
+        q.choice_set.create(choice_text='The sky')
         response = self.client.get(reverse('polls:index'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
-            ['<Question: Past question.>']
+            ['<Question: Past question with two choices.>']
         )
 
     def test_future_question(self):
         """
-        Questions with a pub_date in the future aren't displayed on
-        the index page.
+        Questions with a pub_date in the future AND 
+        at least two choices aren't displayed on the index page.
         """
-        create_question(question_text="Future question.", days=30)
+        q = create_question(question_text="Future question with two choices.", days=30)
+        q.choice_set.create(choice_text='Not much')
+        q.choice_set.create(choice_text='The sky')
         response = self.client.get(reverse('polls:index'))
         self.assertContains(response, "No polls are available.")
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
@@ -84,25 +88,61 @@ class QuestionIndexViewTests(TestCase):
         Even if both past and future questions exist, only past questions
         are displayed.
         """
-        create_question(question_text="Past question.", days=-30)
-        create_question(question_text="Future question.", days=30)
+        q1 = create_question(question_text="Past question with two choices.", days=-30)
+        q1.choice_set.create(choice_text='Not much')
+        q1.choice_set.create(choice_text='The sky')
+        q2 = create_question(question_text="Future question with two choices.", days=30)
+        q2.choice_set.create(choice_text='Not much')
+        q2.choice_set.create(choice_text='The sky')
         response = self.client.get(reverse('polls:index'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
-            ['<Question: Past question.>']
+            ['<Question: Past question with two choices.>']
         )
 
     def test_two_past_questions(self):
         """
-        The questions index page may display multiple questions.
+        The questions index page may display multiple questions
+        WITH at least two choices.
         """
-        create_question(question_text="Past question 1.", days=-30)
-        create_question(question_text="Past question 2.", days=-5)
+        q1 = create_question(question_text="Past question 1.", days=-30)
+        q1.choice_set.create(choice_text='Not much')
+        q1.choice_set.create(choice_text='The sky')
+        q2 = create_question(question_text="Past question 2.", days=-5)
+        q2.choice_set.create(choice_text='Not much')
+        q2.choice_set.create(choice_text='The sky')
+        q2.choice_set.create(choice_text='To infinity')
         response = self.client.get(reverse('polls:index'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
             ['<Question: Past question 2.>', '<Question: Past question 1.>']
         )
+
+    def test_two_past_questions_and_only_one_with_at_least_two_choices(self):
+        """
+        Even if both past questions exist, only the question
+        with at least two choices is displayed.
+        """
+        q1 = create_question(question_text="Past question with two choices.", days=-30)
+        q1.choice_set.create(choice_text='Not much')
+        q1.choice_set.create(choice_text='The sky')
+        q2 = create_question(question_text="Past question with one choice.", days=-30)
+        q2.choice_set.create(choice_text='Not much')
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(
+            response.context['latest_question_list'],
+            ['<Question: Past question with two choices.>']
+    )
+
+    def test_past_questions_with_less_than_two_choices(self):
+        """
+        Past questions with only with only one choice is not displayed.
+        """
+        q1 = create_question(question_text="Past question with only one choice.", days=-30)
+        q1.choice_set.create(choice_text='Not much')
+        response = self.client.get(reverse('polls:index'))
+        self.assertQuerysetEqual(response.context['latest_question_list'], []
+    )
 
 
 class QuestionDetailViewTests(TestCase):
