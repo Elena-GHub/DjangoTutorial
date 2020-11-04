@@ -13,3 +13,9 @@ I received a notification about the secret key from this django project being ex
 ### Part 5 - Unit tests and a couple of extra
 First I added the regular unit tests as per the tutorial.  
 In the tutorial, they had a point when they suggested that only questions with choices should be displayed in the Polls index view. I actually thought that even questions with only one choice did not make sense. Therefore, I also reworked both the index view and the existing tests in order to make sure that only questions with at least two choices were displayed in the Polls index view.  
+  
+### Part 6 - Customize Polls app's look and feel
+With the little I already knew about front-end, I found this part of the tutorial very succinct.  
+So I went a little freestyle and I added the following:  
+* __Template extension__: this [tutorial](https://tutorial.djangogirls.org/en/template_extending/) came in handy.  
+* __css styling__: I added a dark background image and I made a __sticky footer__ (here is [the simplest solution I found for this](https://css-tricks.com/couple-takes-sticky-footer/#there-is-flexbox))
