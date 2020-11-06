@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 from .models import Choice, Question
 
@@ -14,21 +15,26 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         """
-        Return the last five published questions 
+        If logged-in user is admin all questions are returned,
+        Otherwise, return the last five published questions 
         (not including those set to be published in the future
         nor questions with less than two choices).
         """
-        
-        questions = list(Question.objects.filter(
-            pub_date__lte=timezone.now()
-        ).order_by('-pub_date'))
-        questions_with_at_least_two_choices = list()
-        
-        for question in questions:
-            if question.choice_set.count() > 1:
-                questions_with_at_least_two_choices.append(question)
+        user=self.request.user        
+        if user.is_superuser:
+            questions = Question.objects.all()
+            return questions
+        else:
+            questions = list(Question.objects.filter(
+                pub_date__lte=timezone.now()
+            ).order_by('-pub_date'))
+            questions_with_at_least_two_choices = list()
+            
+            for question in questions:
+                if question.choice_set.count() > 1:
+                    questions_with_at_least_two_choices.append(question)
 
-        return questions_with_at_least_two_choices
+            return questions_with_at_least_two_choices
 
 
 class DetailView(generic.DetailView):

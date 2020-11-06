@@ -3,6 +3,7 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from .models import Question
 
@@ -143,6 +144,18 @@ class QuestionIndexViewTests(TestCase):
         response = self.client.get(reverse('polls:index'))
         self.assertQuerysetEqual(response.context['latest_question_list'], []
     )
+
+    def test_logged_in_admin_users_can_see_unpublished_questions(self):
+        """
+        Logged-in admin users are allowed to see all questions
+        even future unpublished ones.
+        """
+        password = 'mypassword'
+        admin_user = User.objects.create_superuser('myuser', 'myemail@test.com', password)
+        self.client.login(username=admin_user.username, password=password)
+        q = create_question(question_text="Future question.", days=30)
+        response = self.client.get(reverse('polls:index'))
+        self.assertContains(response, "Future question.")
 
 
 class QuestionDetailViewTests(TestCase):
