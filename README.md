@@ -18,4 +18,7 @@ In the tutorial, they had a point when they suggested that only questions with c
 With the little I already knew about front-end, I found this part of the tutorial very succinct.  
 So I went a little freestyle and I added the following:  
 * __Template extension__: this [tutorial](https://tutorial.djangogirls.org/en/template_extending/) came in handy.  
-* __css styling__: I added a dark background image and I made a __sticky footer__ (here is [the simplest solution I found for this](https://css-tricks.com/couple-takes-sticky-footer/#there-is-flexbox))
+* __css styling__: I added a dark background image and I made a __sticky footer__ (here is [the simplest solution I found for this](https://css-tricks.com/couple-takes-sticky-footer/#there-is-flexbox))  
+  
+### EXTRA Feature nav - Add a top navbar to the website
+In order to be able to move around views without having to type the url, I added a home page to the website and a top navbar. I did it as another app called "common". I am not sure if this is the best way but it serves the purpose I wanted. The appropriate unit test has also been added.  
