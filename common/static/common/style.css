@@ -16,6 +16,20 @@ body {
     text-align: center;
     font-size: 10px;
   }
+
+a:link {
+    color: rgb(215, 251, 215);
+    text-decoration:none;
+}
+a:hover {
+    color: yellow;
+    text-decoration:none;
+    cursor:pointer;
+}
+a:active {
+    color: rgb(160, 160, 255);
+    text-decoration:none;
+}
   
 .content {
     flex: 1 0 auto;
