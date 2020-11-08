@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django home</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'common/style.css' %}" />
+</head>
+<body>
+    <div class="header">
+        <h1>First <span style="color:#ace1af"><strong>Django</strong></span> site</h1>
+    </div>
+    <div class="navbar justify-content-center">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <a class="nav-link" href="/polls">Polls</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">About</a>
+            </li>
+          </ul> 
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-10">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+<footer class="footer">
+    design by <a href="https://elena-ghub.github.io/">Elena C.</a>
+</footer>
+</body>
+</html>
