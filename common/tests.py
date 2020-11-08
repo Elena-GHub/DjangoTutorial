@@ -10,4 +10,4 @@ class CommonHomeViewTests(TestCase):
         """
         response = self.client.get(reverse('common:home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "WELCOME")
+        self.assertContains(response, "Welcome to my Learning Django playground!")
