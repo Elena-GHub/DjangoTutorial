@@ -42,3 +42,16 @@ a:active {
     font-size: .7rem;
     padding: 20px;
 }
+
+.dropdown-menu {
+    background-color: #2f2f2f !important;
+    opacity: 90%;
+}
+
+.dropdown-menu > a:hover {
+    color: yellow;
+    text-decoration:none;
+    cursor:pointer;
+    background-color: #2f2f2f !important;
+    opacity: 90%;
+}

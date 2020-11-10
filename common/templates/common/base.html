@@ -12,32 +12,48 @@
 </head>
 <body>
     <div class="header">
-        <h1>First <span style="color:#ace1af"><strong>Django</strong></span> site</h1>
+      <div>
+        <a class="navbar-brand float-left" href="https://github.com/Elena-GHub" target="_blank"><img src="/static/common/images/Company-LOGO_50x50.png"></a>
+      </div>
+      <div>
+          <h1 class="float-center">First <span style="color:#ace1af"><strong>Django</strong></span> site</h1>
+      </div>
     </div>
-    <div class="navbar justify-content-center">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a class="nav-link active" href="/">Home</a>
-            </li>
-            <a class="nav-link" href="/polls">Polls</a>
-            <li class="nav-item">
-              <a class="nav-link" href="/admin">Admin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">About</a>
-            </li>
-          </ul> 
-    </div>
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-12">
-            {% block content %}
-            {% endblock %}
+    <div>
+    <nav class="navbar navbar-expand-md">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown"></li>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_apps" href="#">Apps
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown_target">
+              <a class="dropdown-item bg-transparent" href="/polls">Polls</a>
+              <a class="dropdown-item" href="#">App 2 (under construction)</a>
+              <a class="dropdown-item" href="#">App 3 (under construction)</a>
             </div>
-        </div>
-    </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">About</a>
+          </li>
+        </ul>
+    </nav>
+  </div>
+  <div class="content container">
+      <div class="row">
+          <div class="col-md-12">
+          {% block content %}
+          {% endblock %}
+          </div>
+      </div>
+  </div>
 <footer class="footer">
-    design by <a href="https://elena-ghub.github.io/">Elena C.</a>
+    design by <a href="https://elena-ghub.github.io/" target="_blank">Elena C.</a>
 </footer>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
