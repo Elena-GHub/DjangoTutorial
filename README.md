@@ -22,3 +22,6 @@ So I went a little freestyle and I added the following:
   
 ### EXTRA Feature nav - Add a top navbar to the website
 In order to be able to move around views without having to type the url, I added a home page to the website and a top navbar. I did it as another app called "common". I am not sure if this is the best way but it serves the purpose I wanted. The appropriate unit test has also been added.  
+
+### Home screenshot
+![Django tutorial - Home page](https://raw.githubusercontent.com/Elena-GHub/elena-ghub.github.io/master/images/Django_Polls_01.jpg?thumbnail)
