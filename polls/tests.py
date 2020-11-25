@@ -3,7 +3,7 @@ import datetime
 from django.test import TestCase
 from django.utils import timezone
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from .models import Question
 
@@ -151,7 +151,7 @@ class QuestionIndexViewTests(TestCase):
         even future unpublished ones.
         """
         password = 'mypassword'
-        admin_user = User.objects.create_superuser('myuser', 'myemail@test.com', password)
+        admin_user = get_user_model().objects.create_superuser('myuser', 'myemail@test.com', password)
         self.client.login(username=admin_user.username, password=password)
         q = create_question(question_text="Future question.", days=30)
         response = self.client.get(reverse('polls:index'))
